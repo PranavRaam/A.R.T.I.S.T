@@ -1,0 +1,82 @@
+{
+    "personal_information": {
+      "full_name": "John Doe",
+      "email": "john.doe@example.com",
+      "phone_number": "+1 555-123-4567",
+      "linkedin_profile": "https://linkedin.com/in/johndoe",
+      "portfolio_website": "https://johndoe.dev",
+      "address": "New York, USA",
+      "professional_title": "Senior Software Engineer"
+    },
+    "career_objective": "Highly motivated software engineer with 5 years of experience in web development, seeking to leverage my expertise in React and Node.js to create scalable and user-friendly applications.",
+    "skills": {
+      "technical_skills": ["JavaScript", "Python", "SQL", "React", "Django"],
+      "soft_skills": ["Teamwork", "Problem-solving", "Time management"],
+      "tools": ["Git", "Docker", "Jenkins", "AWS"]
+    },
+    "work_experience": [
+      {
+        "job_title": "Senior Software Engineer",
+        "company_name": "ABC Tech Solutions",
+        "location": "San Francisco, CA",
+        "start_date": "January 2019",
+        "end_date": "Present",
+        "responsibilities": [
+          "Led a team of 5 engineers to build and launch a customer-facing mobile application using React Native, reducing load times by 30%.",
+          "Collaborated with cross-functional teams to design and implement a cloud-based solution using AWS and Docker."
+        ],
+        "achievements": [
+          "Increased system uptime by 20% by developing an automated monitoring tool using Python."
+        ]
+      }
+    ],
+    "education": {
+      "degree": "Bachelor of Science in Computer Science",
+      "field_of_study": "Computer Science",
+      "institution_name": "XYZ University",
+      "location": "Chicago, IL",
+      "graduation_date": "May 2020",
+      "gpa": "3.8/4.0"
+    },
+    "certifications": [
+      {
+        "certification_title": "AWS Certified Solutions Architect",
+        "issuing_organization": "Amazon Web Services (AWS)",
+        "issue_date": "June 2021",
+        "expiration_date": "June 2024"
+      }
+    ],
+    "projects": [
+      {
+        "project_name": "E-commerce Platform",
+        "description": "Developed a full-stack e-commerce platform using React for the frontend and Node.js for the backend, allowing users to browse and purchase products securely.",
+        "technologies_used": ["React", "Node.js", "MongoDB"],
+        "link_to_project": "https://github.com/johndoe/ecommerce-platform"
+      }
+    ],
+    "languages": [
+      {
+        "language": "English",
+        "proficiency": "Fluent"
+      },
+      {
+        "language": "Spanish",
+        "proficiency": "Conversational"
+      }
+    ],
+    "awards_honors": [
+      {
+        "award_title": "Employee of the Year",
+        "awarding_body": "ABC Corp",
+        "date_received": "December 2022",
+        "description": "Recognized for outstanding performance and leadership in software development."
+      }
+    ],
+    "interests_hobbies": [
+      "Photography",
+      "Traveling",
+      "Playing Chess",
+      "Cooking"
+    ]
+  }
+  

@@ -1,0 +1,35 @@
+{
+    "fonts": [
+      {
+        "font_name": "Helvetica"
+      },
+      {
+        "font_name": "Arial"
+      },
+      {
+        "font_name": "Calibri"
+      },
+      {
+        "font_name": "Garamond"
+      },
+      {
+        "font_name": "Times New Roman"
+      },
+      {
+        "font_name": "Georgia"
+      },
+      {
+        "font_name": "Avenir"
+      },
+      {
+        "font_name": "Roboto"
+      },
+      {
+        "font_name": "Lato"
+      },
+      {
+        "font_name": "Open Sans"
+      }
+    ]
+  }
+  

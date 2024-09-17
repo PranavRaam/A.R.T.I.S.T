@@ -1,0 +1,36 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+
+\begin{document}
+
+\begin{center}
+    \LARGE{{\textbf{{\name}}}} \\
+    \small{{\contact_info}} \\
+    \small{{\email}} \\
+\end{center}
+
+\vspace{0.2cm}
+
+\section*{Experience}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{{\job_title}} - {{\company_name}} \\
+    ({{\start_date}} - {{\end_date}}) \\
+    {{\job_description}}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\section*{Education}
+\textbf{{\degree}} - {{\institution}} ({{\grad_year}})
+
+\vspace{0.3cm}
+
+\section*{Skills}
+\textit{Technical Skills:} {{\skills}}
+
+\end{document}

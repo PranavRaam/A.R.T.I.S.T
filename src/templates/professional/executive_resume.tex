@@ -1,0 +1,50 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+
+\begin{document}
+
+\begin{center}
+    \Huge{{\textbf{{\name}}}} \\
+    \small{{\contact_info}} \\
+    \small{{\email}} \\
+\end{center}
+
+\vspace{0.4cm}
+
+\section*{Executive Summary}
+\textit{{\executive_summary}}
+
+\vspace{0.4cm}
+
+\section*{Professional Experience}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{{\job_title}} - {{\company_name}} \\
+    ({{\start_date}} - {{\end_date}}) \\
+    {{\job_description_1}} \\
+    {{\job_description_2}}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\section*{Education}
+\textbf{{\degree}} - {{\institution}} ({{\grad_year}})
+
+\vspace{0.3cm}
+
+\section*{Achievements}
+\begin{itemize}[leftmargin=*]
+    \item {{\achievement_1}}
+    \item {{\achievement_2}}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\section*{Skills}
+\textit{Key Skills:} {{\skills}}
+
+\end{document}

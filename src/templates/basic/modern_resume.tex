@@ -1,0 +1,52 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% Color settings for modern look
+\definecolor{sectioncolor}{RGB}{0, 85, 170}
+\titleformat{\section}{\color{sectioncolor}\Large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\color{sectioncolor}\bfseries}{}{0em}{}
+
+\begin{document}
+
+\begin{center}
+    \Huge{{\textbf{{\name}}}} \\
+    \normalsize{{\contact_info}} \\
+    \normalsize{{\email}} \\
+\end{center}
+
+\vspace{0.2cm}
+
+\section*{Summary}
+\textit{{\summary}}
+
+\vspace{0.4cm}
+
+\section*{Experience}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{{\job_title}} - {{\company_name}} ({{\start_date}} - {{\end_date}})
+    \begin{itemize}
+        \item {{\job_description_1}}
+        \item {{\job_description_2}}
+        \item {{\job_description_3}}
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\section*{Education}
+\textbf{{\degree}} - {{\institution}} ({{\grad_year}})
+
+\vspace{0.3cm}
+
+\section*{Skills}
+\textbf{Technical Skills:}
+\begin{itemize}[leftmargin=*]
+    \item {{\skill_1}}
+    \item {{\skill_2}}
+\end{itemize}
+
+\end{document}

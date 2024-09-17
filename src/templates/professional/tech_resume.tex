@@ -1,0 +1,40 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+
+\begin{document}
+
+\begin{center}
+    \LARGE{{\textbf{{\name}}}} \\
+    \normalsize{{\contact_info}} \\
+    \normalsize{{\email}} \\
+\end{center}
+
+\vspace{0.2cm}
+
+\section*{Experience}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{{\job_title}} - {{\company_name}} \\
+    ({{\start_date}} - {{\end_date}}) \\
+    {{\job_description_1}} \\
+    {{\job_description_2}}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\section*{Technical Skills}
+\textit{Programming Languages:} {{\programming_languages}} \\
+\textit{Frameworks:} {{\frameworks}}
+
+\vspace{0.3cm}
+
+\section*{Projects}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{{\project_title}} - {{\project_description}}
+\end{itemize}
+
+\end{document}

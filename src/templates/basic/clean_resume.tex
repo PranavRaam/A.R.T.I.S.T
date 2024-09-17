@@ -1,0 +1,48 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% Define title formatting
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\bfseries}{}{0em}{}
+
+\begin{document}
+
+\begin{center}
+    \LARGE{{\textbf{{\name}}}} \\
+    \normalsize{{\contact_info}} \\
+    \normalsize{{\email}} \\
+\end{center}
+
+\vspace{0.2cm}
+
+\section*{Summary}
+\textit{{\summary}}
+
+\vspace{0.3cm}
+
+\section*{Experience}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{{\job_title}} - {{\company_name}} ({{\start_date}} - {{\end_date}}) \\
+    \textit{{\city}}, {{\state}} \\
+    {{\job_description}}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\section*{Education}
+\textbf{{\degree}} - {{\institution}} ({{\grad_year}}) \\
+{{\education_details}}
+
+\vspace{0.3cm}
+
+\section*{Skills}
+\begin{itemize}[leftmargin=*]
+    \item {{\skill_1}}
+    \item {{\skill_2}}
+    \item {{\skill_3}}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,149 @@
+{
+    "resume_templates": [
+      {
+        "template_title": "Modern Software Engineer Resume",
+        "personal_info_example": "John Doe, Software Engineer with 5+ years of experience specializing in front-end development, based in New York, NY. LinkedIn Profile, GitHub Profile, Email Address, Phone Number.",
+        "career_objective_example": "Enthusiastic software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Eager to join ABC Tech to help develop cutting-edge solutions.",
+        "skills_example": {
+          "technical_skills": ["JavaScript", "React", "Node.js", "MongoDB", "Python"],
+          "soft_skills": ["Team Leadership", "Problem-solving", "Agile Methodologies"],
+          "tools": ["Git", "JIRA", "Docker", "AWS"]
+        },
+        "work_experience_example": [
+          {
+            "job_title": "Senior Software Engineer",
+            "company_name": "ABC Corp",
+            "location": "San Francisco, CA",
+            "start_date": "June 2018",
+            "end_date": "Present",
+            "responsibilities": [
+              "Led the development of a cloud-based SaaS platform, resulting in a 25% increase in productivity.",
+              "Developed a responsive web application using React, Node.js, and MongoDB, used by 10,000+ customers.",
+              "Collaborated with cross-functional teams to deliver highly scalable solutions, reducing load time by 30%."
+            ]
+          }
+        ],
+        "education_example": "Bachelor of Science in Computer Science | XYZ University | 2012 - 2016 | GPA: 3.8/4.0",
+        "certifications_example": [
+          {
+            "certification_title": "AWS Certified Solutions Architect",
+            "issuing_organization": "Amazon Web Services (AWS)",
+            "issue_date": "March 2020"
+          }
+        ],
+        "projects_example": [
+          {
+            "project_name": "E-commerce Platform",
+            "description": "Built an e-commerce platform using React and Node.js, enabling secure transactions and real-time product updates.",
+            "technologies_used": ["React", "Node.js", "MongoDB"]
+          }
+        ],
+        "languages_example": ["English (Fluent)", "Spanish (Conversational)"],
+        "awards_example": [
+          {
+            "award_title": "Best Innovation Award",
+            "awarding_body": "XYZ Hackathon",
+            "date_received": "September 2021"
+          }
+        ],
+        "interests_example": ["Open Source Contributions", "Blockchain Technology", "Traveling"]
+      },
+      {
+        "template_title": "Data Scientist Resume with Project Highlights",
+        "personal_info_example": "Jane Smith, Data Scientist with 4+ years of experience in machine learning and data analytics, based in Austin, TX. LinkedIn Profile, GitHub Profile, Email Address, Phone Number.",
+        "career_objective_example": "Data scientist with expertise in Python, machine learning, and predictive analytics, aiming to leverage my skills to build impactful data-driven solutions at XYZ Analytics.",
+        "skills_example": {
+          "technical_skills": ["Python", "R", "SQL", "Machine Learning", "Data Visualization"],
+          "soft_skills": ["Analytical Thinking", "Collaboration", "Communication"],
+          "tools": ["Pandas", "NumPy", "TensorFlow", "Tableau"]
+        },
+        "work_experience_example": [
+          {
+            "job_title": "Data Scientist",
+            "company_name": "XYZ Analytics",
+            "location": "Austin, TX",
+            "start_date": "April 2019",
+            "end_date": "Present",
+            "responsibilities": [
+              "Built predictive models to forecast customer churn, increasing retention by 15%.",
+              "Implemented data pipelines to process large datasets using Python and SQL.",
+              "Collaborated with cross-functional teams to develop data-driven business strategies."
+            ]
+          }
+        ],
+        "education_example": "Master of Science in Data Science | University of Texas | 2016 - 2018 | GPA: 3.9/4.0",
+        "certifications_example": [
+          {
+            "certification_title": "Certified Data Scientist",
+            "issuing_organization": "DataCamp",
+            "issue_date": "June 2021"
+          }
+        ],
+        "projects_example": [
+          {
+            "project_name": "Predictive Maintenance Model",
+            "description": "Developed a machine learning model in Python that predicts machine failure with 95% accuracy, saving $100,000 in annual downtime costs.",
+            "technologies_used": ["Python", "TensorFlow", "Scikit-learn"]
+          }
+        ],
+        "languages_example": ["English (Fluent)", "French (Basic)"],
+        "awards_example": [
+          {
+            "award_title": "Employee of the Year",
+            "awarding_body": "XYZ Analytics",
+            "date_received": "December 2022"
+          }
+        ],
+        "interests_example": ["Data Visualization", "AI Ethics", "Photography"]
+      },
+      {
+        "template_title": "Creative Graphic Designer Resume",
+        "personal_info_example": "Emily Johnson, Graphic Designer with a flair for creating visually stunning designs, based in Los Angeles, CA. Portfolio Website, LinkedIn Profile, Email Address, Phone Number.",
+        "career_objective_example": "Creative graphic designer with over 6 years of experience in visual storytelling and branding. Seeking to bring my expertise to XYZ Creative to craft compelling visuals for diverse audiences.",
+        "skills_example": {
+          "technical_skills": ["Adobe Photoshop", "Illustrator", "InDesign", "UI/UX Design"],
+          "soft_skills": ["Creativity", "Attention to Detail", "Collaboration"],
+          "tools": ["Figma", "Sketch", "Adobe Creative Suite"]
+        },
+        "work_experience_example": [
+          {
+            "job_title": "Lead Graphic Designer",
+            "company_name": "Creative Studio LA",
+            "location": "Los Angeles, CA",
+            "start_date": "May 2017",
+            "end_date": "Present",
+            "responsibilities": [
+              "Designed branding and marketing materials for 50+ clients, boosting brand visibility by 30%.",
+              "Collaborated with marketing and content teams to create cohesive visual campaigns.",
+              "Led the design and execution of a full website redesign for a major client, increasing site traffic by 40%."
+            ]
+          }
+        ],
+        "education_example": "Bachelor of Fine Arts in Graphic Design | ArtCenter College of Design | 2012 - 2016 | GPA: 3.7/4.0",
+        "certifications_example": [
+          {
+            "certification_title": "Adobe Certified Expert (ACE)",
+            "issuing_organization": "Adobe",
+            "issue_date": "July 2022"
+          }
+        ],
+        "projects_example": [
+          {
+            "project_name": "Branding for XYZ Company",
+            "description": "Led the creation of a full branding package, including logo design, marketing materials, and website mockups, resulting in a successful rebranding campaign.",
+            "technologies_used": ["Adobe Illustrator", "Photoshop", "Sketch"]
+          }
+        ],
+        "languages_example": ["English (Fluent)", "Spanish (Conversational)"],
+        "awards_example": [
+          {
+            "award_title": "Design Excellence Award",
+            "awarding_body": "Creative Studio LA",
+            "date_received": "November 2021"
+          }
+        ],
+        "interests_example": ["Photography", "3D Modeling", "UI/UX Design"]
+      }
+    ]
+  }
+  
