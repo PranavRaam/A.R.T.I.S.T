@@ -1,52 +1,66 @@
-\documentclass[a4paper,10pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[margin=1in]{geometry}
-\usepackage{xcolor}
-\usepackage{enumitem}
-\usepackage{titlesec}
-
-% Color settings for modern look
-\definecolor{sectioncolor}{RGB}{0, 85, 170}
-\titleformat{\section}{\color{sectioncolor}\Large\bfseries}{}{0em}{}
-\titleformat{\subsection}{\color{sectioncolor}\bfseries}{}{0em}{}
-
+\documentclass{article}
 \begin{document}
 
-\begin{center}
-    \Huge{{\textbf{{\name}}}} \\
-    \normalsize{{\contact_info}} \\
-    \normalsize{{\email}} \\
-\end{center}
+\section*{Personal Information}
+\textbf{Name:} {{ name }} \\
+\textbf{Email:} {{ email }} \\
+\textbf{Phone:} {{ phone }} \\
 
-\vspace{0.2cm}
+\section*{Career Summary}
+{{ career_summary }}
 
-\section*{Summary}
-\textit{{\summary}}
-
-\vspace{0.4cm}
-
-\section*{Experience}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{{\job_title}} - {{\company_name}} ({{\start_date}} - {{\end_date}})
-    \begin{itemize}
-        \item {{\job_description_1}}
-        \item {{\job_description_2}}
-        \item {{\job_description_3}}
-    \end{itemize}
+\section*{Work Experience}
+{% for exp in work_experience %}
+\textbf{Job Title:} {{ exp.job_title }} \\
+\textbf{Company:} {{ exp.company_name }} \\
+\textbf{Start Date:} {{ exp.start_date }} \\
+\textbf{End Date:} {{ exp.end_date }} \\
+\textbf{Responsibilities:}
+\begin{itemize}
+    {% for res in exp.responsibilities %}
+    \item {{ res }}
+    {% endfor %}
 \end{itemize}
-
-\vspace{0.3cm}
+\textbf{Achievements:}
+\begin{itemize}
+    {% for ach in exp.achievements %}
+    \item {{ ach }}
+    {% endfor %}
+\end{itemize}
+{% endfor %}
 
 \section*{Education}
-\textbf{{\degree}} - {{\institution}} ({{\grad_year}})
-
-\vspace{0.3cm}
+\textbf{Institution:} {{ education.institution }} \\
+\textbf{Degree:} {{ education.degree }} \\
+\textbf{Graduation Year:} {{ education.graduation_year }} \\
 
 \section*{Skills}
 \textbf{Technical Skills:}
-\begin{itemize}[leftmargin=*]
-    \item {{\skill_1}}
-    \item {{\skill_2}}
+\begin{itemize}
+    {% for skill in skills.technical_skills %}
+    \item {{ skill }}
+    {% endfor %}
+\end{itemize}
+
+\textbf{Soft Skills:}
+\begin{itemize}
+    {% for skill in skills.soft_skills %}
+    \item {{ skill }}
+    {% endfor %}
+\end{itemize}
+
+\textbf{Tools:}
+\begin{itemize}
+    {% for tool in skills.tools %}
+    \item {{ tool }}
+    {% endfor %}
+\end{itemize}
+
+\section*{Hobbies}
+\begin{itemize}
+    {% for hobby in hobbies %}
+    \item {{ hobby }}
+    {% endfor %}
 \end{itemize}
 
 \end{document}

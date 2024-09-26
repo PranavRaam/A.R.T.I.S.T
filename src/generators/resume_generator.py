@@ -1,14 +1,14 @@
-import json
 import os
+import logging
 from jinja2 import Environment, FileSystemLoader
-from input_parser import parse_resume_input  
-from resume_templates import templates      
-from pdf_exporter import export_to_pdf       
-from llm_inference import expand_content    
-from language_support import translate_text  
-from resume_score import score_resume        
-from ats_optimization import optimize_for_ats  
-from version_control import save_version, load_version   
+
+# Placeholder for the missing imports from your project.
+from src.generators.input_parser import parse_resume_input, ValidationError
+from src.generators.pdf_exporter import export_to_pdf as pdf_exporter
+from src.models.llm_inference import LLMInference
+from src.services.resume_ranking_service import ResumeRankingService
+from src.utils.template_renderer import TemplateRenderer
+
 
 class ResumeGenerator:
     def __init__(self, user_input: dict, template_name: str, language: str = 'en', optimize_ats: bool = True):
@@ -18,121 +18,158 @@ class ResumeGenerator:
         self.optimize_ats = optimize_ats
         self.parsed_data = None
         self.final_resume = None
-        self.env = Environment(loader=FileSystemLoader('templates'))
 
     def parse_input(self):
         """
-        Parse and validate user input
+        Parse and validate user input and format it for the LaTeX template.
         """
-        self.parsed_data = parse_resume_input(self.user_input)
-        if not self.parsed_data:
-            raise ValueError("Invalid input data")
-    
+        try:
+            # Validate required fields in user input
+            required_fields = [
+                'name', 'email', 'phone_number', 
+                'institution_name', 'degree', 'graduation_date'
+            ]
+            for field in required_fields:
+                if field not in self.user_input.get('personal_information', {}) and field not in self.user_input.get('education', {}):
+                    raise ValueError(f"Missing '{field}' in user input.")
+            
+            self.parsed_data = {
+                'name': self.user_input['personal_information']['name'],
+                'email': self.user_input['personal_information']['email'],
+                'phone': self.user_input['personal_information']['phone_number'],
+                'career_summary': self.user_input.get('career_objective', ''),
+                'work_experience': self.user_input.get('work_experience', []),
+                'education': {
+                    'institution': self.user_input['education']['institution_name'],
+                    'degree': self.user_input['education']['degree'],
+                    'graduation_year': self.user_input['education']['graduation_date']
+                },
+                'skills': self.user_input.get('skills', {}),
+                'hobbies': self.user_input.get('interests_hobbies', [])
+            }
+
+            # Ensure no missing keys cause issues in the template rendering
+            self.parsed_data.setdefault('career_summary', '')
+            self.parsed_data.setdefault('work_experience', [])
+            self.parsed_data.setdefault('skills', {
+                'technical_skills': [],
+                'soft_skills': [],
+                'tools': []
+            })
+            self.parsed_data.setdefault('hobbies', [])
+
+            if not self.parsed_data:
+                raise ValueError("Parsed data is None. Please check resume generation logic.")
+        except KeyError as e:
+            raise ValueError(f"Missing key in user input: {e}")
+        except ValidationError as e:
+            raise ValueError(f"Input validation error: {e}")
+
     def select_template(self):
         """
-        Load the selected resume template
+        Load the selected resume template.
         """
-        if self.template_name not in templates:
-            raise ValueError(f"Template {self.template_name} not found")
-        return templates[self.template_name]
-    
-    def apply_llm(self):
-        """
-        Use LLM to expand brief inputs (like job responsibilities) into full sentences
-        """
-        sections = ['work_experience', 'career_summary', 'skills']
-        for section in sections:
-            if section in self.parsed_data:
-                self.parsed_data[section] = expand_content(self.parsed_data[section])
-    
-    def apply_language_support(self):
-        """
-        Translate the resume content into the selected language
-        """
-        if self.language != 'en': 
-            for key, value in self.parsed_data.items():
-                if isinstance(value, str):
-                    self.parsed_data[key] = translate_text(value, target_lang=self.language)
-                elif isinstance(value, list):
-                    self.parsed_data[key] = [translate_text(item, target_lang=self.language) for item in value]
-    
-    def optimize_for_ats(self):
-        """
-        Optimize the resume for ATS systems
-        """
-        if self.optimize_ats:
-            self.parsed_data = optimize_for_ats(self.parsed_data)
-    
+        try:
+            template_dir = os.path.join("src", "templates/basic")
+            env = Environment(loader=FileSystemLoader(template_dir))
+            return env.get_template(self.template_name + '.tex')
+        except Exception as e:
+            raise ValueError(f"Template {self.template_name} not found: {str(e)}")
+
     def render_resume(self):
         """
-        Render the resume with the selected template and parsed data
+        Render the resume with the selected template and parsed data.
         """
-        template = self.select_template()
-        template = self.env.get_template(template['file'])  
-        self.final_resume = template.render(self.parsed_data)
-    
-    def score_resume(self):
+        try:
+            # Select the LaTeX template
+            template = self.select_template()
+            
+            # Render the template with parsed data
+            self.final_resume = template.render(self.parsed_data)
+            logging.info("Rendered resume:\n" + self.final_resume)
+        except Exception as e:
+            raise ValueError(f"Error rendering resume: {e}")
+
+    def export_to_pdf(self):
         """
-        Score the resume and provide feedback
+        Convert the rendered resume content to a PDF.
         """
-        score = score_resume(self.final_resume)
-        print(f"Resume score: {score}/100")
-        return score
-    
-    def save_version(self, version_name: str):
-        """
-        Save the current resume version for later use
-        """
-        save_version(version_name, self.final_resume)
-    
-    def load_version(self, version_name: str):
-        """
-        Load a saved version of the resume
-        """
-        self.final_resume = load_version(version_name)
-    
-    def export_resume(self, export_format='pdf'):
-        """
-        Export the resume to the desired format (PDF)
-        """
-        if export_format == 'pdf':
-            export_to_pdf(self.final_resume)
-        else:
-            with open(f'resume.{export_format}', 'w') as file:
-                file.write(self.final_resume)
-    
-    def preview_resume(self):
-        """
-        Provide a real-time preview of the resume
-        """
-        print(self.final_resume)
-    
+        try:
+            # Debugging: print the type and content of the final_resume
+            print(f"Final resume type: {type(self.final_resume)}")
+            print(f"Final resume content: {self.final_resume[:100]}...")  # Print first 100 characters for preview
+
+            if not isinstance(self.final_resume, str):
+                raise ValueError("final_resume must be a LaTeX string.")
+
+            if not self.final_resume:
+                raise ValueError("No resume content to export.")
+
+            # Check if all required keys are present
+            required_keys = ['name', 'email', 'phone']
+            for key in required_keys:
+                if key not in self.parsed_data:
+                    raise ValueError(f"Parsed data missing '{key}'. Please check input data.")
+
+            # Call to actual PDF exporter function
+            pdf_exporter({
+                "content": self.final_resume,
+                "name": self.parsed_data['name'],
+                "email": self.parsed_data['email'],
+                "phone": self.parsed_data['phone']
+            })
+        except Exception as e:
+            raise ValueError(f"Error exporting resume to PDF: {e}")
+
     def generate(self):
         """
-        Full generation process
+        Full generation process.
         """
         try:
             self.parse_input()
-            self.apply_llm()  
-            self.apply_language_support()  
-            self.optimize_for_ats()  
-            self.render_resume()  
-            self.score_resume()  
+            self.render_resume()
+            self.export_to_pdf()
         except Exception as e:
-            print(f"Error generating resume: {e}")
-    
+            logging.error(f"Error generating resume: {e}")
+            raise
+
+
 if __name__ == "__main__":
+    # Sample input data
     sample_input = {
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "phone_number": "+1234567890",
-        "work_experience": ["Developed software", "Led a team of engineers"],
-        "education": ["Bachelor of Computer Science"],
-        "skills": ["Python", "Machine Learning"],
-        "career_summary": "Experienced software engineer",
+        "personal_information": {
+            "name": "John Doe",
+            "email": "john.doe@gmail.com",
+            "phone_number": "+911288234586"
+        },
+        "work_experience": [
+            {
+                "job_title": "Software Engineer",
+                "company_name": "ABC Corp",
+                "start_date": "January 2020",
+                "end_date": "Present",
+                "responsibilities": ["Developed software", "Led a team of engineers"],
+                "achievements": ["Improved code efficiency", "Reduced deployment time"]
+            }
+        ],
+        "education": {
+            "institution_name": "XYZ University",
+            "degree": "Bachelor of Computer Science",
+            "graduation_date": "June 2018"
+        },
+        "skills": {
+            "technical_skills": ["Python", "Machine Learning"],
+            "soft_skills": ["Communication", "Teamwork"],
+            "tools": ["Git", "Docker"]
+        },
+        "career_objective": "To work as a software engineer in a challenging environment.",
+        "interests_hobbies": ["Reading", "Coding"]
     }
-    
-    # Generate a resume
-    generator = ResumeGenerator(user_input=sample_input, template_name="modern", language="en")
-    generator.generate()  
-    generator.export_resume()  
+
+    # Initialize the resume generator with the sample input and template
+    generator = ResumeGenerator(user_input=sample_input, template_name="modern_resume", language="en")
+    try:
+        # Generate the resume
+        generator.generate()
+    except Exception as e:
+        logging.error(f"Error: {e}")

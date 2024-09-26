@@ -89,43 +89,107 @@ def parse_resume_input(data: dict) -> dict:
     """
     Main function to parse and validate the entire resume input data
     """
-    required_fields = ["name", "email", "phone", "experience", "education"]
+    required_fields = ["personal_information", "work_experience", "education"]
     
     # Check if all required fields are present
     for field in required_fields:
         if field not in data:
             raise ValidationError(f"Missing required field: {field}")
     
-    # Validate and sanitize name
-    name = sanitize_input(data["name"])
-    
-    # Validate email
-    email = validate_email_address(sanitize_input(data["email"]))
-    
-    # Validate phone number
-    phone = validate_phone_number(sanitize_input(data["phone"]))
+    # Extract and validate personal information
+    personal_info = data.get("personal_information", {})
+    name = sanitize_input(personal_info.get("full_name", ""))
+    email = validate_email_address(sanitize_input(personal_info.get("email", "")))
+    phone = validate_phone_number(sanitize_input(personal_info.get("phone_number", "")))
     
     # Parse work experience
-    experience = parse_experience(data.get("experience", []))
-    
+    work_experience = []
+    for exp in data.get("work_experience", []):
+        if not all(key in exp for key in ("job_title", "company_name", "start_date")):
+            raise ValidationError("Work experience requires 'job_title', 'company_name', and 'start_date'")
+        job_title = sanitize_input(exp["job_title"])
+        company_name = sanitize_input(exp["company_name"])
+        start_date = validate_date(exp["start_date"], date_format="%B %Y")
+        end_date = exp.get("end_date", "Present")
+        if end_date != "Present":
+            end_date = validate_date(end_date, date_format="%B %Y")
+        work_experience.append({
+            "job_title": job_title,
+            "company_name": company_name,
+            "start_date": start_date,
+            "end_date": end_date,
+            "responsibilities": [sanitize_input(res) for res in exp.get("responsibilities", [])],
+            "achievements": [sanitize_input(ach) for ach in exp.get("achievements", [])]
+        })
+
     # Parse education
-    education = parse_education(data.get("education", []))
+    education = data.get("education", {})
+    institution = sanitize_input(education.get("institution_name", ""))
+    degree = sanitize_input(education.get("degree", ""))
+    graduation_year = validate_date(education.get("graduation_date", ""), date_format="%B %Y")
     
+    parsed_education = {
+        "institution": institution,
+        "degree": degree,
+        "graduation_year": graduation_year
+    }
+
     # Optional fields handling
-    skills = [sanitize_input(skill) for skill in data.get("skills", [])]
-    career_summary = sanitize_input(data.get("career_summary", "Not Provided"))
-    hobbies = [sanitize_input(hobby) for hobby in data.get("hobbies", [])]
+    skills = {
+        "technical_skills": [sanitize_input(skill) for skill in data.get("skills", {}).get("technical_skills", [])],
+        "soft_skills": [sanitize_input(skill) for skill in data.get("skills", {}).get("soft_skills", [])],
+        "tools": [sanitize_input(tool) for tool in data.get("skills", {}).get("tools", [])]
+    }
+    career_summary = sanitize_input(data.get("career_objective", "Not Provided"))
+    hobbies = [sanitize_input(hobby) for hobby in data.get("interests_hobbies", [])]
     
     # Return structured and validated data
     processed_data = {
         "name": name,
         "email": email,
         "phone": phone,
-        "experience": experience,
-        "education": education,
+        "work_experience": work_experience,
+        "education": parsed_education,
         "skills": skills,
         "career_summary": career_summary,
         "hobbies": hobbies
     }
     
     return processed_data
+
+
+if __name__ == "__main__":
+    sample_input = {
+        "personal_information": {
+            "full_name": "John Doe",
+            "email": "john.doe@gmail.com",
+            "phone_number": "+911288234586"
+        },
+        "work_experience": [
+            {
+                "job_title": "Software Engineer",
+                "company_name": "ABC Corp",
+                "start_date": "January 2020",
+                "end_date": "Present",
+                "responsibilities": ["Developed software", "Led a team of engineers"],
+                "achievements": ["Improved code efficiency", "Reduced deployment time"]
+            }
+        ],
+        "education": {
+            "institution_name": "XYZ University",
+            "degree": "Bachelor of Computer Science",
+            "graduation_date": "June 2018"
+        },
+        "skills": {
+            "technical_skills": ["Python", "Machine Learning"],
+            "soft_skills": ["Communication", "Teamwork"],
+            "tools": ["Git", "Docker"]
+        },
+        "career_objective": "To work as a software engineer in a challenging environment.",
+        "interests_hobbies": ["Reading", "Coding"]
+    }
+
+    parsed_data = parse_resume_input(sample_input)
+    print(parsed_data)
+
+
